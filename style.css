@@ -1,0 +1,687 @@
+/* 
+  ===== CSS RESET =====
+  This removes all the default styling that browsers add automatically.
+  Think of it like starting with a blank canvas instead of one with random paint on it.
+*/
+* {
+  margin: 0; /* Removes space around elements */
+  padding: 0; /* Removes space inside elements */
+  box-sizing: border-box; /* Makes math easier - padding gets included in width */
+}
+
+/* 
+  ===== COLOR PALETTE =====
+  These are like paint colors in your palette. Instead of writing the same color 
+  code everywhere, we give each color a name. Want to change the main color? 
+  Just change it here and it updates everywhere!
+*/
+:root {
+  --primary-color: #8e19dc; /* Main colour - CHANGE THIS for different main color */
+  --secondary-color: #2d8aa6; /* Lighter petroleum blue - for accents */
+  --accent-color: #57bd99; /* Even lighter blue-green - for highlights */
+  --heading-color: #2a959c; /* h2 titles color */
+  --text-dark: #2c3e50; /* Dark text color */
+  --text-light: #7f8c8d; /* Light gray text */
+  --background-light: #f8fafb; /* Very light background */
+  --white: #ffffff; /* Pure white */
+  --shadow: 0 8px 25px rgba(26, 95, 122, 0.15); /* Soft shadow with our main color */
+}
+
+/* Apply heading color to h2 elements */
+h2 {
+  color: var(--heading-color);
+}
+
+/* 
+  ===== MAIN BODY STYLING =====
+  This sets up the foundation for everything on the page
+*/
+body {
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+  line-height: 1.6; /* Space between lines of text */
+  color: var(--text-dark); /* Default text color */
+  background-color: var(--background-light); /* Page background */
+  font-size: 16px; /* Base font size */
+}
+
+/* 
+  ===== CONTAINER =====
+  This is like a picture frame - it keeps all content centered and not too wide
+*/
+.container {
+  max-width: 1200px; /* Never wider than 1200px */
+  margin: 0 auto; /* Centers the container */
+  padding: 0 20px; /* Adds 20px space on left and right */
+}
+
+/* 
+  ===== HEADER SECTION =====
+  This is the big colorful section at the top with name and contact info
+*/
+header {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  ); /* Gradient background */
+  color: var(--white); /* White text on colored background */
+  padding: 80px 0; /* 80px space above and below */
+  text-align: center; /* Everything centered */
+  position: relative; /* Needed for the floating pattern */
+  overflow: hidden; /* Hides parts of the pattern that go outside */
+}
+
+/* 
+  ===== FLOATING BACKGROUND PATTERN =====
+  This creates those subtle floating dots in the header background
+  ::before creates an invisible element that we can style
+*/
+header::before {
+  content: ""; /* Required for pseudo-elements */
+  position: absolute; /* Position it exactly where we want */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; /* Fill the entire header */
+  /* This creates small white dots using SVG */
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+  background-size: 50px 50px; /* Size of each dot pattern */
+  animation: float 20s infinite linear; /* Makes them float up continuously */
+}
+
+/* 
+  ===== FLOATING ANIMATION =====
+  This makes the background pattern move slowly upward
+*/
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  } /* Start position */
+  100% {
+    transform: translateY(-100px);
+  } /* End position (100px up) */
+}
+
+/* 
+  ===== PROFILE SECTION =====
+  This makes sure the text appears above the floating pattern
+*/
+.profile-section {
+  position: relative; /* Needed to layer above the pattern */
+  z-index: 1; /* Higher number = appears on top */
+}
+
+/* 
+  ===== PROFILE PHOTO PLACEHOLDER =====
+  This is where you would put a real photo. Right now it shows initials.
+  TO ADD A REAL PHOTO: Replace the "SB" text with <img src="your-photo.jpg" alt="Sabina Brdnik">
+*/
+.profile-photo {
+  width: 150px; /* Circle width */
+  height: 150px; /* Circle height */
+  border-radius: 50%; /* Makes it perfectly round */
+  background: var(--white); /* White background */
+  margin: 0 auto 30px; /* Centers it and adds space below */
+  display: flex; /* Flexbox for centering content */
+  align-items: center; /* Centers vertically */
+  justify-content: center; /* Centers horizontally */
+  font-size: 2.5rem; /* Big text for initials */
+  font-weight: 700; /* Bold text */
+  color: var(--primary-color); /* Text color */
+  box-shadow: var(--shadow); /* Soft shadow */
+  border: 4px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  overflow: hidden; /* Important for images */
+}
+
+/* Style for images within profile photo */
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* 
+  ===== MAIN HEADING (NAME) =====
+*/
+h1 {
+  font-size: 3rem !important; /* Large text */
+  margin-bottom: 15px; /* Space below */
+  font-weight: 300; /* Light weight for modern look */
+  letter-spacing: -1px; /* Slightly closer letters */
+}
+
+/* 
+  ===== TAGLINE (JOB TITLE) =====
+*/
+.tagline {
+  font-size: 1.3rem; /* Medium text */
+  opacity: 0.9; /* Slightly transparent */
+  margin-bottom: 40px; /* Space below */
+  font-weight: 400; /* Normal weight */
+}
+
+/* 
+  ===== CONTACT INFO ROW =====
+  This creates a row of contact information that wraps on small screens
+*/
+.contact-info {
+  display: flex; /* Flexbox layout */
+  justify-content: center; /* Centers all items */
+  gap: 40px; /* Space between each item */
+  flex-wrap: wrap; /* Wraps to next line on small screens */
+}
+
+/* 
+  ===== INDIVIDUAL CONTACT ITEMS =====
+  Each piece of contact info (email, phone, etc.)
+*/
+.contact-item {
+  display: flex; /* Flexbox for icon and text */
+  align-items: center; /* Centers vertically */
+  gap: 10px; /* Space between icon and text */
+  font-size: 1rem; /* Text size */
+  background: rgba(255, 255, 255, 0.1); /* Subtle background */
+  padding: 8px 16px; /* Padding inside */
+  border-radius: 20px; /* Rounded corners */
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+}
+
+/* 
+  ===== MAIN CONTENT AREA =====
+  All the sections below the header
+*/
+main {
+  padding: 80px 0; /* Space above and below */
+}
+
+/* 
+  ===== SECTION STYLING =====
+  Each white box section (About, Experience, etc.)
+  TO ADD NEW SECTION: Copy any existing <section> and change the content
+*/
+section {
+  background: var(--white); /* White background */
+  margin-bottom: 40px; /* Space below each section */
+  padding: 50px; /* Space inside each section */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: var(--shadow); /* Soft shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  border: 1px solid rgba(26, 95, 122, 0.05); /* Very subtle border */
+}
+
+/* 
+  ===== SECTION HOVER EFFECT =====
+  When you hover over a section, it lifts up slightly
+*/
+section:hover {
+  transform: translateY(-8px); /* Moves up 8px */
+  box-shadow: 0 12px 40px rgba(26, 95, 122, 0.2); /* Bigger shadow */
+}
+
+/* 
+  ===== SECTION HEADINGS =====
+  The big titles like "Work Experience", "Education", etc.
+  TO CHANGE SECTION TITLES: Edit the text inside <h2> tags
+*/
+h2 {
+  color: var(--heading-color); /* Use the heading color variable */
+  font-size: 2.2rem; /* Large text */
+  margin-bottom: 30px; /* Space below */
+  padding-bottom: 15px; /* Space below text */
+  border-bottom: 3px solid var(--secondary-color); /* Colored line below */
+  position: relative; /* Needed for the accent line */
+  font-weight: 600; /* Semi-bold */
+}
+
+/* 
+  ===== ACCENT LINE UNDER HEADINGS =====
+  The small colored line that appears under each section heading
+*/
+h2::after {
+  content: ""; /* Required for pseudo-elements */
+  position: absolute; /* Position it exactly */
+  bottom: -3px; /* Right on the border */
+  left: 0; /* Start from left */
+  width: 60px; /* 60px wide */
+  height: 3px; /* 3px tall */
+  background: var(--accent-color); /* Accent color */
+  border-radius: 3px; /* Rounded ends */
+}
+
+/* 
+  ===== WORK EXPERIENCE & EDUCATION ITEMS =====
+  Each job or education entry
+*/
+.experience-item,
+.education-item {
+  border-left: 4px solid var(--secondary-color); /* Colored line on left */
+  padding-left: 30px; /* Space from the colored line */
+  margin-bottom: 40px; /* Space below each item */
+  position: relative; /* Needed for the timeline dot */
+}
+
+/* 
+  ===== TIMELINE DOTS =====
+  The small circles that appear on the timeline
+*/
+.experience-item::before,
+.education-item::before {
+  content: ""; /* Required for pseudo-elements */
+  position: absolute; /* Position it exactly */
+  left: -10px; /* Slightly left of the border */
+  top: 0; /* At the top */
+  width: 16px; /* Circle width */
+  height: 16px; /* Circle height */
+  background: var(--secondary-color); /* Colored circle */
+  border-radius: 50%; /* Makes it perfectly round */
+  border: 3px solid var(--white); /* White border around circle */
+}
+
+/* 
+  ===== JOB TITLES AND DEGREES =====
+*/
+.job-title,
+.degree {
+  font-size: 1.4rem; /* Large text */
+  font-weight: 600; /* Semi-bold */
+  color: var(--primary-color); /* Main color */
+  margin-bottom: 8px; /* Space below */
+}
+
+/* 
+  ===== COMPANY NAMES AND SCHOOLS =====
+*/
+.company,
+.school {
+  font-size: 1.1rem; /* Medium text */
+  color: var(--accent-color); /* Accent color */
+  margin-bottom: 5px; /* Space below */
+  font-weight: 500; /* Medium weight */
+}
+
+/* 
+  ===== DATES =====
+*/
+.date {
+  font-size: 0.9rem; /* Small text */
+  color: var(--text-light); /* Light gray */
+  margin-bottom: 15px; /* Space below */
+}
+
+/* 
+  ===== DESCRIPTION TEXT =====
+  Regular paragraph text
+*/
+.description {
+  color: var(--text-dark); /* Dark text */
+  line-height: 1.8; /* Extra space between lines */
+  font-size: 1.05rem; /* Slightly larger text */
+}
+
+/* 
+  ===== ACHIEVEMENT LISTS =====
+  The bullet points under each job
+  TO ADD MORE ACHIEVEMENTS: Add more <li> items inside <ul class="achievements">
+*/
+.achievements {
+  list-style: none; /* Remove default bullets */
+  margin-top: 20px; /* Space above */
+}
+
+.achievements li {
+  padding: 10px 0; /* Space above and below each item */
+  color: var(--text-dark); /* Dark text */
+  position: relative; /* Needed for custom bullet */
+  padding-left: 30px; /* Space for custom bullet */
+  line-height: 1.7; /* Line spacing */
+}
+
+/* 
+  ===== CUSTOM BULLET POINTS =====
+  The arrow symbols before each achievement
+*/
+.achievements li::before {
+  content: "▶"; /* Arrow symbol */
+  position: absolute; /* Position it exactly */
+  left: 0; /* At the start */
+  color: var(--secondary-color); /* Colored arrow */
+  font-size: 0.8rem; /* Smaller than text */
+  top: 12px; /* Align with text */
+}
+
+/* 
+  ===== SKILLS SECTION GRID =====
+  Creates a responsive grid for skill categories
+*/
+.skills-section {
+  display: grid; /* Grid layout */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); /* Responsive columns */
+  gap: 30px; /* Space between grid items */
+  margin-top: 30px; /* Space above */
+}
+
+/* 
+  ===== SKILL CATEGORY BOXES =====
+  Each skill category (Marketing, Project Management, etc.)
+*/
+.skill-category {
+  background: var(--background-light); /* Light background */
+  padding: 30px; /* Space inside */
+  border-radius: 15px; /* Rounded corners */
+  border-left: 4px solid var(--secondary-color); /* Colored left border */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.skill-category:hover {
+  transform: translateY(-5px); /* Lift on hover */
+}
+
+.skill-category h3 {
+  color: var(--primary-color); /* Main color */
+  margin-bottom: 20px; /* Space below */
+  font-size: 1.3rem; /* Medium text */
+  font-weight: 600; /* Semi-bold */
+}
+
+.skill-category ul {
+  list-style: none; /* Remove default bullets */
+}
+
+.skill-category li {
+  padding: 8px 0; /* Space above and below */
+  color: var(--text-dark); /* Dark text */
+  position: relative; /* Needed for custom bullet */
+  padding-left: 25px; /* Space for custom bullet */
+}
+
+.skill-category li::before {
+  content: "▶"; /* Arrow symbol */
+  position: absolute; /* Position it exactly */
+  left: 0; /* At the start */
+  color: var(--secondary-color); /* Colored arrow */
+  font-size: 0.7rem; /* Small arrow */
+}
+
+/* 
+  ===== LANGUAGES GRID =====
+  Grid layout for language skills
+*/
+.language-grid {
+  display: grid; /* Grid layout */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(180px, 1fr)
+  ); /* Responsive columns */
+  gap: 20px; /* Space between items */
+  margin-top: 25px; /* Space above */
+}
+
+/* 
+  ===== LANGUAGE SKILL BOXES =====
+  Each language skill item
+*/
+.language-item {
+  background: var(--background-light); /* Light background */
+  padding: 25px; /* Space inside */
+  border-radius: 12px; /* Rounded corners */
+  text-align: center; /* Centered text */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+  border: 1px solid rgba(26, 95, 122, 0.1); /* Subtle border */
+}
+
+.language-item:hover {
+  transform: translateY(-3px); /* Lift on hover */
+}
+
+.language-item h4 {
+  color: var(--primary-color); /* Main color */
+  margin-bottom: 8px; /* Space below */
+  font-size: 1.1rem; /* Medium text */
+}
+
+.language-level {
+  color: var(--text-light); /* Light text */
+  font-size: 0.9rem; /* Small text */
+}
+
+/* 
+  ===== ARTICLES GRID =====
+  Grid layout for article items
+*/
+.articles-grid {
+  display: grid; /* Grid layout */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(320px, 1fr)
+  ); /* Responsive columns */
+  gap: 25px; /* Space between items */
+  margin-top: 30px; /* Space above */
+}
+
+/* 
+  ===== ARTICLE ITEMS =====
+  Each article/publication item
+*/
+.article-item {
+  background: var(--background-light); /* Light background */
+  padding: 30px; /* Space inside */
+  border-radius: 15px; /* Rounded corners */
+  transition: all 0.3s ease; /* Smooth hover effect */
+  border: 1px solid rgba(26, 95, 122, 0.1); /* Subtle border */
+}
+
+.article-item:hover {
+  border-color: var(--secondary-color); /* Colored border on hover */
+  transform: translateY(-5px); /* Lift on hover */
+  box-shadow: 0 10px 30px rgba(26, 95, 122, 0.15); /* Shadow on hover */
+}
+
+.article-item h3 {
+  color: var(--primary-color); /* Main color */
+  margin-bottom: 12px; /* Space below */
+  font-size: 1.2rem; /* Medium text */
+  font-weight: 600; /* Semi-bold */
+}
+
+.article-item .source {
+  color: var(--accent-color); /* Accent color */
+  font-size: 0.85rem; /* Small text */
+  font-weight: 600; /* Semi-bold */
+  margin-bottom: 15px; /* Space below */
+  text-transform: uppercase; /* ALL CAPS */
+  letter-spacing: 1px; /* Spaced letters */
+}
+
+.article-item p {
+  color: var(--text-dark); /* Dark text */
+  font-size: 0.95rem; /* Slightly small text */
+  line-height: 1.6; /* Line spacing */
+}
+
+/* 
+  ===== KEY ACHIEVEMENTS SECTION =====
+  The highlight boxes with big numbers
+*/
+.highlights-grid {
+  display: grid; /* Grid layout */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Responsive columns */
+  gap: 30px; /* Space between items */
+  margin-top: 40px; /* Space above */
+}
+
+/* 
+  ===== ACHIEVEMENT HIGHLIGHT BOXES =====
+  Each achievement with big number
+*/
+.highlight-item {
+  background: linear-gradient(
+    135deg,
+    var(--secondary-color),
+    var(--primary-color)
+  ); /* Gradient background */
+  color: var(--white); /* White text */
+  padding: 40px 30px; /* Space inside */
+  border-radius: 20px; /* Rounded corners */
+  text-align: center; /* Centered text */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+  position: relative; /* Needed for hover effect */
+  overflow: hidden; /* Hide overflow */
+}
+
+.highlight-item:hover {
+  transform: translateY(-8px) scale(1.02); /* Lift and slightly grow on hover */
+}
+
+.highlight-item::before {
+  content: ""; /* Required for pseudo-element */
+  position: absolute; /* Position it exactly */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; /* Fill entire box */
+  background: linear-gradient(
+    135deg,
+    var(--accent-color),
+    var(--secondary-color)
+  ); /* Different gradient */
+  opacity: 0; /* Invisible by default */
+  transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.highlight-item:hover::before {
+  opacity: 1; /* Visible on hover */
+}
+
+.highlight-item .number {
+  font-size: 2.5rem; /* Big number */
+  font-weight: 700; /* Bold */
+  margin-bottom: 10px; /* Space below */
+  position: relative; /* Above the background */
+  z-index: 1; /* Above the background */
+}
+
+.highlight-item .text {
+  font-size: 1rem; /* Normal text */
+  opacity: 0.95; /* Slightly transparent */
+  position: relative; /* Above the background */
+  z-index: 1; /* Above the background */
+  font-weight: 400; /* Normal weight */
+}
+
+/* 
+  ===== FOOTER =====
+  Bottom section with copyright
+*/
+footer {
+  background: var(--primary-color); /* Main color background */
+  color: var(--white); /* White text */
+  text-align: center; /* Centered text */
+  padding: 40px 0; /* Space above and below */
+  margin-top: 60px; /* Space above */
+}
+
+/* 
+  ===== RESPONSIVE DESIGN =====
+  These rules make the website work well on phones and tablets
+*/
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px; /* Less padding on small screens */
+  }
+
+  header {
+    padding: 60px 0; /* Less padding on small screens */
+  }
+
+  h1 {
+    font-size: 2.2rem; /* Smaller heading on small screens */
+  }
+
+  .contact-info {
+    flex-direction: column; /* Stack vertically on small screens */
+    gap: 15px; /* Less space between items */
+  }
+
+  section {
+    padding: 30px 20px; /* Less padding on small screens */
+    margin-bottom: 25px; /* Less margin on small screens */
+  }
+
+  /* Make all grids single column on small screens */
+  .skills-section,
+  .articles-grid,
+  .highlights-grid {
+    grid-template-columns: 1fr; /* Single column */
+  }
+
+  .profile-photo {
+    width: 120px; /* Smaller photo on small screens */
+    height: 120px; /* Smaller photo on small screens */
+  }
+}
+
+/* 
+  ===== PRINT STYLES =====
+  These rules apply when someone prints the page
+*/
+@media print {
+  header::before {
+    display: none; /* Hide floating pattern when printing */
+  }
+
+  section {
+    box-shadow: none; /* Remove shadows when printing */
+    break-inside: avoid; /* Don't split sections across pages */
+  }
+
+  .articles-grid,
+  .highlights-grid {
+    grid-template-columns: 1fr; /* Single column when printing */
+  }
+}
+
+/* 
+  ===== FLOATING HOME BUTTON =====
+  Floating button to take you back to index page
+*/
+.floating-home-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--primary-color);
+  color: var(--white);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-home-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* On smaller screens it will be smaller */
+@media (max-width: 768px) {
+  .floating-home-btn {
+    width: 45px;
+    height: 45px;
+    top: 15px;
+    right: 15px;
+    font-size: 1.1rem;
+  }
+}
