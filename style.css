@@ -202,7 +202,7 @@ main {
 */
 section {
   background: var(--white); /* White background */
-  margin-bottom: 40px; /* Space below each section */
+  margin-bottom: 30px; /* Space below each section */
   padding: 50px; /* Space inside each section */
   border-radius: 20px; /* Rounded corners */
   box-shadow: var(--shadow); /* Soft shadow */
@@ -459,6 +459,10 @@ h2::after {
   ); /* Responsive columns */
   gap: 25px; /* Space between items */
   margin-top: 30px; /* Space above */
+}
+
+.showcase-section {
+  margin-bottom: -50px; /* Reduced margin from default +40px */
 }
 
 /* 
